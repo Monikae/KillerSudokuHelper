@@ -1,0 +1,123 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>KillerSudokuHelper</title>
+    <style></style>
+  </head>
+<body>
+
+<p>Click on the buttons to join the fields</p>
+<!--
+<form>
+
+<input />
+
+</form>
+
+<p>Javascript</p>
+-->
+
+
+<form>
+
+<script type="text/javascript">
+
+var CONNECTED = 'Connected';
+var SEPARATED = 'Separated';
+var CONNECTED_COLOR = 'lightgray';
+var SEPARATED_COLOR = 'black';
+
+document.write('<table>');
+
+for (var zeile = 1; zeile <= 9; zeile++)
+{
+  write_zeile_input(zeile);
+  if (zeile < 9)
+  {
+    write_zeile_buttons(zeile);
+  }
+}
+
+document.write('</table>');
+
+function write_zeile_input(zeile)
+{
+  document.write('<tr>');
+  for (var spalte = 1; spalte <= 9; spalte++)
+  {
+    document.write('<td><input size="1" id="C'+zeile+spalte+'" style="width:2em" /></td>');
+    if (spalte < 9)
+    {
+      // button between two horizontally adjacent fields
+      var id = "I"+zeile+spalte;
+      write_button(id, "width:2px");
+    }
+  }
+  document.write('</tr>');
+}
+
+function write_zeile_buttons(zeile)
+{
+  document.write('<tr>');
+  for (var spalte = 1; spalte <= 9; spalte ++)
+  {
+    // button between two vertically adjacent fields
+    var id = "_"+zeile+spalte;
+    write_button(id, "width:100%;height:7px");
+    // space
+    if (spalte < 9)
+    {
+      document.write('<td></td>');
+    }
+  }
+  document.write('</tr>');
+}
+
+function write_button(id, size)
+{
+  document.write('<td>');
+  document.write('<input name="');
+  document.write(id);
+  document.write('" ');
+  document.write('onclick="toggle(\'');
+  document.write(id);
+  document.write('\')"' );
+  document.write('type="button" ');
+  document.write('id="');
+  document.write(id);
+  document.write('" ');
+  document.write('style="');
+  document.write(size);
+  document.write('" />');
+  document.write('</td>');
+  document.getElementById(id).sudokuBorderState = SEPARATED;
+  document.getElementById(id).style.backgroundColor = SEPARATED_COLOR;
+}
+
+function toggle(id)
+{
+  var element = document.getElementById(id);
+
+  if (element.sudokuBorderState == CONNECTED)
+  {  
+    element.sudokuBorderState = SEPARATED;
+    element.style.backgroundColor = SEPARATED_COLOR;
+  }
+  else 
+  {
+    element.sudokuBorderState = CONNECTED;
+    element.style.backgroundColor = CONNECTED_COLOR;
+  }
+}
+
+
+
+</script>
+
+</form>
+
+</body>
+</html>
